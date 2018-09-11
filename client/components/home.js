@@ -10,7 +10,8 @@ class Home extends React.Component {
       inputAnswer: "",
     }
   }
-  handleSubmit = () => {
+  handleSubmit = (evt) => {
+    evt.preventDefault();
     this.props.getGifs(this.state.inputAnswer);
   }
 
