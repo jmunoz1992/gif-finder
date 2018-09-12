@@ -1,22 +1,33 @@
 import React from 'react'
 import {connect} from 'react-redux'
 import {getGifsThunk} from '../store'
-import { Form, Input, Button } from 'semantic-ui-react'
+import { Form, Input, Button, Message} from 'semantic-ui-react'
+import copy from 'copy-to-clipboard'
 
 class Home extends React.Component {
   constructor(props){
     super(props);
     this.state = {
       inputAnswer: "",
+      hideMessage: true,
+      titleGif: "",
     }
   }
   handleSubmit = (evt) => {
     evt.preventDefault();
     this.props.getGifs(this.state.inputAnswer);
+    this.setState({hideMessage: true, titleGif: ""})
   }
 
   handleChange = (evt) => {
     this.setState({inputAnswer: evt.target.value})
+  }
+
+  handleClick = (evt) => {
+    const title = evt.target.attributes[0].nodeValue
+    const gifUrl = evt.target.attributes[1].nodeValue
+    this.setState({hideMessage: false, titleGif: title})
+    copy(gifUrl)
   }
 
   render() {
@@ -46,6 +57,10 @@ class Home extends React.Component {
     const inputStyle = {
       width: "900px"
     }
+    const messageStyle = {
+      width: "300px",
+      margin: "0 auto"
+    }
     return (
       <div style={bodyStyle}>
         <div>
@@ -55,13 +70,17 @@ class Home extends React.Component {
             <Button color="green" type="submit">Submit</Button>
             <br />
           </Form>
+          <Message style={messageStyle} hidden={this.state.hideMessage}>You have copied <b>{this.state.titleGif}</b> to your clipboard.</Message>
         </div>
         <br />
         <div style={imgPackStyle}>
           {
             gifs ?
             gifs.map(gif =>
-                <img style={imgStyle} key={gif.id} src={gif.images.downsized.url} />
+              {
+                const gifUrl = gif.images.downsized.url
+                return (<img style={imgStyle} value={gif.title} key={gif.id} src={gifUrl} onClick={(evt) => this.handleClick(evt)}/>)
+              }
             ) : null
           }
         </div>
