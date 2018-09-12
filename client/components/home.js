@@ -25,6 +25,12 @@ class Home extends React.Component {
       margin: "0 auto",
       width: "80%",
     }
+    const title = {
+      textAlign: "center",
+      fontSize: "100px",
+      color: "#21ba45",
+      fontFamily: "Arial, sans-serif"
+    }
     const imgPackStyle = {
       display: "flex",
       flexWrap: "wrap",
@@ -43,6 +49,7 @@ class Home extends React.Component {
     return (
       <div style={bodyStyle}>
         <div>
+          <h1 style={title}>GIFINDER</h1>
           <Form onSubmit={this.handleSubmit}>
             <Input style={inputStyle} placeholder='Search...' onChange={this.handleChange} />
             <Button color="green" type="submit">Submit</Button>
