@@ -1,4 +1,4 @@
-import Axios from 'Axios'
+import axios from 'axios'
 
 /**
  * ACTION TYPES
@@ -20,7 +20,7 @@ const getGifs = gifs => ({type: GET_GIFS, gifs})
  */
 export const getGifsThunk = (query) => async dispatch => {
   try {
-    const res = await Axios.get(`http://api.giphy.com/v1/gifs/search?q=${query}&api_key=3Scw7m82zJbfSn8aipUENSrHBRCTd2Ta`);
+    const res = await axios.get(`http://api.giphy.com/v1/gifs/search?q=${query}&api_key=3Scw7m82zJbfSn8aipUENSrHBRCTd2Ta`);
     const data = await res.data.data;
     return await dispatch(getGifs(data || defaultGifs))
   } catch (err) {
