@@ -58,11 +58,14 @@ class Home extends React.Component {
       width: "900px"
     }
     const messageStyle = {
-      width: "300px",
-      margin: "0 auto"
+      width: "80%",
+      margin: "0 auto",
+      position: "fixed"
     }
     return (
       <div style={bodyStyle}>
+        <Message style={messageStyle} success hidden={this.state.hideMessage}>You have copied <b>{this.state.titleGif}</b> to your clipboard.</Message>
+        <br /><br />
         <div>
           <h1 style={title}>GIFINDER</h1>
           <Form onSubmit={this.handleSubmit}>
@@ -70,7 +73,6 @@ class Home extends React.Component {
             <Button color="green" type="submit">Submit</Button>
             <br />
           </Form>
-          <Message style={messageStyle} hidden={this.state.hideMessage}>You have copied <b>{this.state.titleGif}</b> to your clipboard.</Message>
         </div>
         <br />
         <div style={imgPackStyle}>
